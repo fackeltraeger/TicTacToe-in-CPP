@@ -47,46 +47,61 @@ int bCheckWinner()
 
 void start()
 {
-    char markerP1;
-    cout << "Player1 choose ur marker : like 'X or O' : ";
-    cin >> markerP1;
-
-    g_IntCurrentPlayer = 1;
-    g_ChCurrentMarker = markerP1;
-
-    displayOnScreen();
-
-    for (size_t i = 0; i < 9; i++)
+    while (true)
     {
-        int slotVal = 0;
-        cout << "it's player " << g_IntCurrentPlayer << "'s chance please select the from the vacent slot : ";
-        cin >> slotVal;
+        cout << "Player1 choose ur marker : like 'X or O' : ";
+        cin >> g_ChCurrentMarker;
+        bool bWinner = false;
 
-        if (slotVal < 1 || slotVal > 9)
-        {
-            cout << "Invalid Slot value selected, please try again.";
-            i--;
-            continue;
-        }
-        else if (false == isNotOccupied(slotVal))
-        {
-            cout << "Slot is already occupied try again";
-            i--;
-            continue;
-        }
+        g_IntCurrentPlayer = 1;
+        g_ChCurrentMarker = toupper(g_ChCurrentMarker);
 
         displayOnScreen();
 
-        if (-1 != bCheckWinner())
+        for (size_t i = 0; i < 9; i++)
         {
-            cout << endl << "player" << g_IntCurrentPlayer << " won" << endl;
+            int slotVal = 0;
+            cout << "it's player " << g_IntCurrentPlayer << "'s chance please select the from the vacent slot : ";
+            cin >> slotVal;
+
+            if (slotVal < 1 || slotVal > 9)
+            {
+                cout << "Invalid Slot value selected, please try again.";
+                i--;
+                continue;
+            }
+            else if (false == isNotOccupied(slotVal))
+            {
+                cout << "Slot is already occupied try again";
+                i--;
+                continue;
+            }
+
+            displayOnScreen();
+
+            if (-1 != bCheckWinner())
+            {
+                cout << endl << "player" << g_IntCurrentPlayer << " won" << endl;
+                bWinner = true;
+                break;
+            }
+            cout << endl;
+
+            g_IntCurrentPlayer = (g_IntCurrentPlayer == 1) ? 2 : 1;
+            g_ChCurrentMarker = (g_ChCurrentMarker == 'X') ? 'O' : 'X';
+
+        }
+        if (false == bWinner)
+            cout << "the game is tie" << endl;
+
+        cout << endl << "Enter >=1 to exit, else enter 0 to new game: ";
+        cin >> g_bPlayOrExit;
+        if (g_bPlayOrExit == 1)
+        {
             break;
         }
+        vec = { {'1','2','3'},{'4','5','6'},{'7','8','9'} };
         cout << endl;
-
-        g_IntCurrentPlayer = (g_IntCurrentPlayer == 1) ? 2 : 1;
-        g_ChCurrentMarker = (g_ChCurrentMarker == 'X') ? 'O' : 'X';
-
     }
 }
 
