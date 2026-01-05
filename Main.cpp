@@ -1,4 +1,3 @@
-
 #include "pch.h"
 
 void start()
@@ -20,6 +19,7 @@ void start()
         }
 
         displayOnScreen();
+        cout << endl;
 
         for (size_t i = 0; i < 9; i++)
         {
@@ -64,28 +64,17 @@ void start()
             cin >> playcheck;
             playcheck = tolower(playcheck);
             if (playcheck == 'y')
-            {
                 break;
-            }
             else if (playcheck == 'n')
-            {
-                g_bPlayOrExit = true;
-                break;
-            }
+                return;
             else
-            {
                 cout << "\nselect proper option\n";
-            }
-        }
-        if (true == g_bPlayOrExit)
-        {
-            g_bPlayOrExit = false;
-            break;
         }
 
         vec = { {'1','2','3'},{'4','5','6'},{'7','8','9'} };
         cout << endl;
     }
+    return;
 }
 
 int main()

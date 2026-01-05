@@ -12,7 +12,6 @@ int g_IntCurrentPlayer = -1;
 char g_ChCurrentMarker;
 int g_boardLopper = 0;
 int g_IntPlyerWon = 0;
-bool g_bPlayOrExit = false;
 
 
 void displayOnScreen()
