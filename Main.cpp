@@ -5,12 +5,19 @@ void start()
 {
     while (true)
     {
+        g_ChCurrentMarker = '_';
         cout << "Player1 choose ur marker : like 'X or O' : ";
         cin >> g_ChCurrentMarker;
         bool bWinner = false;
 
         g_IntCurrentPlayer = 1;
         g_ChCurrentMarker = toupper(g_ChCurrentMarker);
+
+        if (g_ChCurrentMarker != 'O' && g_ChCurrentMarker != 'X')
+        {
+            cout << "\nwrong selection, please select proper option\n";
+            continue;
+        }
 
         displayOnScreen();
 
@@ -50,12 +57,32 @@ void start()
         if (false == bWinner)
             cout << "the game is tie" << endl;
 
-        cout << endl << "Enter >=1 to exit, else enter 0 to new game: ";
-        cin >> g_bPlayOrExit;
-        if (g_bPlayOrExit == 1)
+        while (true)
         {
+            char playcheck = '_';
+            cout << "Continue to play? (y/n): ";
+            cin >> playcheck;
+            playcheck = tolower(playcheck);
+            if (playcheck == 'y')
+            {
+                break;
+            }
+            else if (playcheck == 'n')
+            {
+                g_bPlayOrExit = true;
+                break;
+            }
+            else
+            {
+                cout << "\nselect proper option\n";
+            }
+        }
+        if (true == g_bPlayOrExit)
+        {
+            g_bPlayOrExit = false;
             break;
         }
+
         vec = { {'1','2','3'},{'4','5','6'},{'7','8','9'} };
         cout << endl;
     }

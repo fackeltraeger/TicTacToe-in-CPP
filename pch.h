@@ -15,7 +15,6 @@ int g_IntPlyerWon = 0;
 bool g_bPlayOrExit = false;
 
 
-
 void displayOnScreen()
 {
     cout << "-----------" << endl;
